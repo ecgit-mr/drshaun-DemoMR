@@ -712,7 +712,17 @@ PrefabInstance:
     - target: {fileID: 4640305554752778304, guid: 940a822addfc898428785af1d4b0220b,
         type: 3}
       propertyPath: m_text
-      value: Patient1
+      value: QAGCF28L
+      objectReference: {fileID: 0}
+    - target: {fileID: 4640305554752778304, guid: 940a822addfc898428785af1d4b0220b,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 4640305554752778304, guid: 940a822addfc898428785af1d4b0220b,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 4640305554752778304, guid: 940a822addfc898428785af1d4b0220b,
         type: 3}
@@ -742,7 +752,17 @@ PrefabInstance:
     - target: {fileID: 4640305555126235377, guid: 940a822addfc898428785af1d4b0220b,
         type: 3}
       propertyPath: m_text
-      value: Patient3
+      value: QAGRR06R
+      objectReference: {fileID: 0}
+    - target: {fileID: 4640305555126235377, guid: 940a822addfc898428785af1d4b0220b,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 4640305555126235377, guid: 940a822addfc898428785af1d4b0220b,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 4640305555126235377, guid: 940a822addfc898428785af1d4b0220b,
         type: 3}
@@ -767,7 +787,17 @@ PrefabInstance:
     - target: {fileID: 4640305555387316260, guid: 940a822addfc898428785af1d4b0220b,
         type: 3}
       propertyPath: m_text
-      value: Patient2
+      value: QAGPF37L
+      objectReference: {fileID: 0}
+    - target: {fileID: 4640305555387316260, guid: 940a822addfc898428785af1d4b0220b,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 4640305555387316260, guid: 940a822addfc898428785af1d4b0220b,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 4640305555387316260, guid: 940a822addfc898428785af1d4b0220b,
         type: 3}
@@ -822,7 +852,17 @@ PrefabInstance:
     - target: {fileID: 5769127390524819485, guid: 940a822addfc898428785af1d4b0220b,
         type: 3}
       propertyPath: m_text
-      value: Patient4
+      value: SAGLR50L
+      objectReference: {fileID: 0}
+    - target: {fileID: 5769127390524819485, guid: 940a822addfc898428785af1d4b0220b,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 5769127390524819485, guid: 940a822addfc898428785af1d4b0220b,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 5769127390524819485, guid: 940a822addfc898428785af1d4b0220b,
         type: 3}
@@ -862,7 +902,17 @@ PrefabInstance:
     - target: {fileID: 6901938634293142709, guid: 940a822addfc898428785af1d4b0220b,
         type: 3}
       propertyPath: m_text
-      value: Patient5
+      value: SAGRM40L
+      objectReference: {fileID: 0}
+    - target: {fileID: 6901938634293142709, guid: 940a822addfc898428785af1d4b0220b,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 6901938634293142709, guid: 940a822addfc898428785af1d4b0220b,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 6901938634293142709, guid: 940a822addfc898428785af1d4b0220b,
         type: 3}
