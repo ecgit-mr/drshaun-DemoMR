@@ -187,7 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handType: 3
   proximityType: 3
-  constraintOnRotation: 5
+  constraintOnRotation: 0
   useLocalSpaceForConstraint: 0
 --- !u!1001 &6184601092138898244
 PrefabInstance:
