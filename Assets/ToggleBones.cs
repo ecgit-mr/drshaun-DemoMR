@@ -23,6 +23,7 @@ public class ToggleBones : MonoBehaviour
 
     private void Start()
     {
+		this.togglePin = true;
 		for (int i = 0; i < interactables.Length; i++)
 		{
 			var patientButton = interactables[i];
@@ -30,11 +31,11 @@ public class ToggleBones : MonoBehaviour
 			int index = i;
 			patientButton.OnClick.AddListener(() =>
 			{
-				this.SetCharacterView(this.MVDModelData.CharacterViews[index], false);
+				this.SetCharacterView(this.MVDModelData.CharacterViews[index]);
 			});
 		}
 
-		this.SetCharacterView(this.MVDModelData.CharacterViews[0], true);
+		this.SetCharacterView(this.MVDModelData.CharacterViews[0]);
 
 		this.LockOrUnlock.OnClick.AddListener(this.TogglePin);
 	}
@@ -50,7 +51,7 @@ public class ToggleBones : MonoBehaviour
 		}
 	}
 
-    private void SetCharacterView(GameObject prefab, bool enforce)
+    private void SetCharacterView(GameObject prefab)
     {
 		if (_characterView != null)
 		{
@@ -62,11 +63,8 @@ public class ToggleBones : MonoBehaviour
 		var bone = _characterView.AddComponent<Bone>();
 		bone.UpdatePosition();
 
-		if (!enforce)
-		{
-			_characterView.GetComponent<BoxCollider>().enabled = this.togglePin;
-			_characterView.GetComponent<ObjectManipulator>().enabled = this.togglePin;
-			_characterView.GetComponent<BoundsControl>().enabled = this.togglePin;
-		}
+		_characterView.GetComponent<BoxCollider>().enabled = this.togglePin;
+		_characterView.GetComponent<ObjectManipulator>().enabled = this.togglePin;
+		_characterView.GetComponent<BoundsControl>().enabled = this.togglePin;
 	}
 }
