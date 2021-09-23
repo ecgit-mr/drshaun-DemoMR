@@ -1,6 +1,6 @@
 ﻿using Microsoft.MixedReality.Toolkit.UI;
-using System.Collections;
-using System.Collections.Generic;
+using Microsoft.MixedReality.Toolkit.UI.BoundsControl;
+using System;
 using UnityEngine;
 
 public class ToggleBones : MonoBehaviour
@@ -13,12 +13,15 @@ public class ToggleBones : MonoBehaviour
 	private MVDModelData _mvdModelData = null;
 
 	[SerializeField]
+	private Interactable LockOrUnlock;
+
+	[SerializeField]
 	private Interactable[] interactables;
 
 	private GameObject _characterView;
+    private bool togglePin;
 
-
-	private void Start()
+    private void Start()
     {
 		for (int i = 0; i < interactables.Length; i++)
 		{
@@ -27,14 +30,27 @@ public class ToggleBones : MonoBehaviour
 			int index = i;
 			patientButton.OnClick.AddListener(() =>
 			{
-				this.SetCharacterView(this.MVDModelData.CharacterViews[index]);
+				this.SetCharacterView(this.MVDModelData.CharacterViews[index], false);
 			});
 		}
 
-		this.SetCharacterView(this.MVDModelData.CharacterViews[0]);
+		this.SetCharacterView(this.MVDModelData.CharacterViews[0], true);
+
+		this.LockOrUnlock.OnClick.AddListener(this.TogglePin);
 	}
 
-	private void SetCharacterView(GameObject prefab)
+    private void TogglePin()
+   	{
+		this.togglePin = !this.togglePin;
+		if (_characterView != null)
+		{
+			_characterView.GetComponent<BoxCollider>().enabled = this.togglePin;
+			_characterView.GetComponent<ObjectManipulator>().enabled = this.togglePin;
+			_characterView.GetComponent<BoundsControl>().enabled = this.togglePin;
+		}
+	}
+
+    private void SetCharacterView(GameObject prefab, bool enforce)
     {
 		if (_characterView != null)
 		{
@@ -45,5 +61,12 @@ public class ToggleBones : MonoBehaviour
 		_characterView = Instantiate(prefab);
 		var bone = _characterView.AddComponent<Bone>();
 		bone.UpdatePosition();
+
+		if (!enforce)
+		{
+			_characterView.GetComponent<BoxCollider>().enabled = this.togglePin;
+			_characterView.GetComponent<ObjectManipulator>().enabled = this.togglePin;
+			_characterView.GetComponent<BoundsControl>().enabled = this.togglePin;
+		}
 	}
 }
