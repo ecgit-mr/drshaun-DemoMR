@@ -1,4 +1,5 @@
-﻿using Microsoft.MixedReality.Toolkit.UI;
+﻿using Microsoft.MixedReality.Toolkit;
+using Microsoft.MixedReality.Toolkit.UI;
 using Microsoft.MixedReality.Toolkit.UI.BoundsControl;
 using System;
 using UnityEngine;
@@ -23,6 +24,22 @@ public class ToggleBones : MonoBehaviour
 
     private void Start()
     {
+		// Disable gaze
+		CoreServices.InputSystem.GazeProvider.Enabled = false;
+
+		var inputSystemProfile = CoreServices.InputSystem.InputSystemProfile;
+		if (inputSystemProfile == null)
+		{
+			return;
+		}
+
+		// Disabled hand mesh
+		var handTrackingProfile = inputSystemProfile.HandTrackingProfile;
+		if (handTrackingProfile != null)
+		{
+			handTrackingProfile.EnableHandMeshVisualization = false;
+		}
+
 		this.togglePin = true;
 		for (int i = 0; i < interactables.Length; i++)
 		{
