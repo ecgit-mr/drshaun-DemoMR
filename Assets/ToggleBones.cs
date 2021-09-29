@@ -38,6 +38,7 @@ public class ToggleBones : MonoBehaviour
 		if (handTrackingProfile != null)
 		{
 			handTrackingProfile.EnableHandMeshVisualization = false;
+			handTrackingProfile.EnableHandJointVisualization = false;
 		}
 
 		this.togglePin = true;
@@ -77,11 +78,15 @@ public class ToggleBones : MonoBehaviour
 		}
 
 		_characterView = Instantiate(prefab);
-		var bone = _characterView.AddComponent<Bone>();
+		var bone = _characterView.GetComponent<Bone>();
 		bone.UpdatePosition();
 
 		_characterView.GetComponent<BoxCollider>().enabled = this.togglePin;
 		_characterView.GetComponent<ObjectManipulator>().enabled = this.togglePin;
 		_characterView.GetComponent<BoundsControl>().enabled = this.togglePin;
+
+		var transparentScript = this.GetComponent<MakeObjectTransparent>();
+		transparentScript.currentGameObject = bone.MainObject;
+		transparentScript.SetCurrentAlpha();
 	}
 }

@@ -1,10 +1,13 @@
-﻿using Microsoft.MixedReality.Toolkit.UI;
-using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Bone : MonoBehaviour
 {
     protected Vector3 PanelOffset = new Vector3(0f, 0f, 0.6f);
+
+    public GameObject MainObject => this.mainObject;
+
+    [SerializeField]
+    private GameObject mainObject;
 
     // Start is called before the first frame update
     void Start()
