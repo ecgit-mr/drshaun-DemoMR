@@ -14,7 +14,7 @@ public class Bone : MonoBehaviour
     {
     }
 
-    public void UpdatePosition()
+    public Vector3 UpdatePosition()
     {
         UnifiedCamera unifiedCamera = UnifiedCamera.Instance();
 
@@ -23,5 +23,6 @@ public class Bone : MonoBehaviour
                                     (unifiedCamera.GetCameraForward() * this.PanelOffset.z);
 
         this.transform.position = unifiedCamera.GetCameraPosition() + forwardOffset;
+        return this.transform.position;
     }
 }

@@ -17,12 +17,18 @@ public class ToggleBones : MonoBehaviour
 	private Interactable LockOrUnlock;
 
 	[SerializeField]
+	private Interactable Reset;
+
+	[SerializeField]
 	private Interactable[] interactables;
 
 	private GameObject _characterView;
     private bool togglePin;
+    private Vector3 currentPos = Vector3.zero;
+    private Vector3 currentScale = Vector3.one;
+	private Quaternion currentRotation = Quaternion.identity;
 
-    private void Start()
+	private void Start()
     {
 		// Disable gaze
 		CoreServices.InputSystem.GazeProvider.Enabled = false;
@@ -49,13 +55,19 @@ public class ToggleBones : MonoBehaviour
 			int index = i;
 			patientButton.OnClick.AddListener(() =>
 			{
-				this.SetCharacterView(this.MVDModelData.CharacterViews[index]);
+				this.SetCharacterView(this.MVDModelData.CharacterViews[index], false);
 			});
 		}
 
-		this.SetCharacterView(this.MVDModelData.CharacterViews[0]);
+		this.SetCharacterView(this.MVDModelData.CharacterViews[0], true);
 
 		this.LockOrUnlock.OnClick.AddListener(this.TogglePin);
+		this.Reset.OnClick.AddListener(this.ResetScale);
+	}
+
+	private void ResetScale()
+    {
+		_characterView.transform.localScale = new Vector3(1, 1, 1);
 	}
 
     private void TogglePin()
@@ -69,21 +81,39 @@ public class ToggleBones : MonoBehaviour
 		}
 	}
 
-    private void SetCharacterView(GameObject prefab)
+    private void SetCharacterView(GameObject prefab, bool first)
     {
 		if (_characterView != null)
 		{
+			this.currentPos = _characterView.transform.position;
+			this.currentScale = _characterView.transform.localScale;
+			this.currentRotation = _characterView.transform.localRotation;
 			_characterView.transform.parent = null;
 			Destroy(_characterView.gameObject);
 		}
 
 		_characterView = Instantiate(prefab);
 		var bone = _characterView.GetComponent<Bone>();
-		bone.UpdatePosition();
+		if (first)
+		{
+			this.currentPos = bone.UpdatePosition();
+		}
+		else
+		{
+			bone.transform.position = this.currentPos;
+			bone.transform.localScale = this.currentScale;
+			bone.transform.localRotation = this.currentRotation;
+		}
 
+		var boundsControl = _characterView.GetComponent<BoundsControl>();
+		var boundsManipulator = _characterView.GetComponent<ObjectManipulator>();
 		_characterView.GetComponent<BoxCollider>().enabled = this.togglePin;
-		_characterView.GetComponent<ObjectManipulator>().enabled = this.togglePin;
-		_characterView.GetComponent<BoundsControl>().enabled = this.togglePin;
+		boundsManipulator.enabled = this.togglePin;
+		boundsControl.enabled = this.togglePin;
+		boundsManipulator.ReleaseBehavior = ObjectManipulator.ReleaseBehaviorType.KeepVelocity;
+		boundsManipulator.SmoothingNear = true;
+		boundsManipulator.SmoothingFar = true;
+		boundsControl.SmoothingActive = true;
 
 		var transparentScript = this.GetComponent<MakeObjectTransparent>();
 		transparentScript.currentGameObject = bone.MainObject;
